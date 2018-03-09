@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>de.figge.cocktailabend</groupId>
-	<artifactId>cocktail-backend</artifactId>
+	<artifactId>cocktailabend</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
@@ -34,6 +34,13 @@
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- begin websocket -->
+		<dependency>
 			<groupId>org.webjars</groupId>
 			<artifactId>bootstrap</artifactId>
 			<version>4.0.0-1</version>
@@ -48,10 +55,6 @@
 			<artifactId>webjars-locator-core</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-websocket</artifactId>
-		</dependency>
-		<dependency>
 			<groupId>org.webjars</groupId>
 			<artifactId>sockjs-client</artifactId>
 			<version>1.0.2</version>
@@ -61,6 +64,13 @@
 			<artifactId>stomp-websocket</artifactId>
 			<version>2.3.3</version>
 		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-websocket</artifactId>
+		</dependency>
+		<!-- end websocket -->
+
+		<!-- begin database -->
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-core</artifactId>
@@ -76,6 +86,7 @@
 			<artifactId>h2</artifactId>
 			<version>LATEST</version>
 		</dependency>
+		<!-- end database -->
 
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -83,10 +94,10 @@
 			<version>5.0.4.RELEASE</version>
 		</dependency>
 
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
+			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
 	</dependencies>
 

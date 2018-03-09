@@ -1,4 +1,4 @@
-package de.figge.cocktailabend;
+package de.figge.cocktailabend.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.messaging.simp.config.MessageBrokerRegistry;
