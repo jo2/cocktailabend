@@ -1,0 +1,43 @@
+body {
+    background-color: #333333;
+    text-align: center;
+}
+
+h1 {
+    font-size: 10em;
+    margin: 0;
+}
+
+#cocktailList, #jumboList {
+    list-style-type: none;
+    padding-left: 0;
+    font-size: 600%;
+}
+
+#cocktailList {
+    columns: 2;
+    -webkit-columns: 2;
+    -moz-columns: 2;
+}
+
+.cocktailContainer {
+    background-color: white;
+    overflow-y: hidden;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+}
+
+#jumboList {
+
+}
+
+.jumboContainer {
+    background-color: lightgreen;
+    overflow-y: hidden;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+}
