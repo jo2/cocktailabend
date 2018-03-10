@@ -12,13 +12,63 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
-@RequestMapping("/cocktailabend")
-@CrossOrigin(origins = "*")
-public class CocktailController {
+public class DefaultController {
+
     @Autowired
     private CocktailRepository cocktailRepository;
+    @Autowired
+    private SimpMessagingTemplate template;
 
-    @RequestMapping(value = "/",
+    @GetMapping("/")
+    public String home1() {
+        return "/home";
+    }
+
+    @GetMapping("/home")
+    public String home() {
+        return "/home";
+    }
+
+    @GetMapping("/admin")
+    public String admin() {
+        return "/admin";
+    }
+
+    @GetMapping("/user")
+    public String user() {
+        return "/user";
+    }
+
+    @GetMapping("/cocktails")
+    public String cocktails() {
+        return "/cocktails";
+    }
+
+    @GetMapping("/login")
+    public String login() {
+        return "/login";
+    }
+
+    @GetMapping("/403")
+    public String error403() {
+        return "/error/403";
+    }
+
+    @RequestMapping(value = "/admin/create",
+            method = RequestMethod.PUT,
+            produces = MediaType.APPLICATION_JSON_VALUE,
+            consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> create(@RequestBody Cocktail cocktail) {
+        cocktail = cocktailRepository.save(cocktail);
+        if (cocktail.isJumbo()) {
+            template.convertAndSend("/topic/jumbos", cocktail);
+        } else {
+            template.convertAndSend("/topic/cocktails", cocktail);
+        }
+        return ResponseEntity.ok(cocktail);
+    }
+
+    @RequestMapping(value = "/all",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> getAll() {
@@ -34,7 +84,7 @@ public class CocktailController {
         return ResponseEntity.ok(cocktail != null);
     }
 
-    @RequestMapping(value = "/count/",
+    @RequestMapping(value = "/count",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> getNumberOfCocktails() {

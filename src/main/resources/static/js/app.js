@@ -18,7 +18,6 @@ function connect() {
     stompClient = Stomp.over(socket);
     stompClient.connect({}, function (frame) {
         setConnected(true);
-        console.log('Connected: ' + frame);
         stompClient.subscribe('/topic/cocktails', function (message) {
             showCocktails(JSON.parse(message.body));
         });
@@ -29,7 +28,6 @@ function connect() {
 }
 
 function showCocktails(message) {
-    console.log(message);
     list = $('#cocktailList');
     if (list.children("li").length === 5) {
         list.children("li").first().remove();
@@ -40,7 +38,6 @@ function showCocktails(message) {
 }
 
 function showJumbos(message) {
-    console.log(message);
     list = $('#jumboList');
     if (list.children("li").length === 5) {
         list.children("li").first().remove();

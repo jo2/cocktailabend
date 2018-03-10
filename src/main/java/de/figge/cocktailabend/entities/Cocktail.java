@@ -3,14 +3,13 @@ package de.figge.cocktailabend.entities;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.Date;
 
 @Entity
 @Table(uniqueConstraints={
         @UniqueConstraint(columnNames = {"number", "jumbo"})
-})
-public class Cocktail implements Serializable {
+}, name = "cocktail")
+public class Cocktail {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
