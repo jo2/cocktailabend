@@ -4,11 +4,11 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>de.figge.cocktailabend</groupId>
-	<artifactId>cocktail-backend</artifactId>
+	<artifactId>cocktailabend</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>cocktail-backend</name>
+	<name>cocktailabend</name>
 	<description>Demo project for Spring Boot</description>
 
 	<parent>
@@ -88,6 +88,9 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+
+
+		
 	</dependencies>
 
 	<build>

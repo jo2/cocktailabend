@@ -17,8 +17,6 @@ import java.util.List;
 public class CocktailController {
     @Autowired
     private CocktailRepository cocktailRepository;
-    @Autowired
-    private SimpMessagingTemplate template;
 
     @RequestMapping(value = "/",
             method = RequestMethod.GET,
@@ -26,20 +24,6 @@ public class CocktailController {
     public ResponseEntity<?> getAll() {
         List<Cocktail> cocktails = cocktailRepository.findAllByOrderByNumberAscJumboAsc();
         return ResponseEntity.ok(cocktails);
-    }
-
-    @RequestMapping(value = "/",
-            method = RequestMethod.PUT,
-            produces = MediaType.APPLICATION_JSON_VALUE,
-            consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> create(@RequestBody Cocktail cocktail) {
-        cocktail = cocktailRepository.save(cocktail);
-        if (cocktail.isJumbo()) {
-            template.convertAndSend("/topic/jumbos", cocktail);
-        } else {
-            template.convertAndSend("/topic/cocktails", cocktail);
-        }
-        return ResponseEntity.ok(cocktail);
     }
 
     @RequestMapping(value = "/ready/{number}/{jumbo}",
