@@ -1,12 +1,25 @@
-h1 {
-	color:#0000FF;
-}
-
-h2{
-	color:#FF0000;
-}
-
 footer{
 	margin-top:60px;
 }
 
+.navbar-figge {
+	padding-top: 0;
+}
+
+input[type=number]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button {
+	-webkit-appearance: none;
+	margin: 0;
+}
+
+input[type=number] {
+	-moz-appearance:textfield;
+}
+
+.figge-row {
+	margin-top: 10px;
+}
+
+.figge-col {
+    padding-left: 0;
+}

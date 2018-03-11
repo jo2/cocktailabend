@@ -52,5 +52,25 @@ $(function () {
         e.preventDefault();
     });
     connect();
+
+    $.ajax({
+        url: "/all/jumbo",
+        method: "GET",
+        success: function (data) {
+            for (var i = 0; i < data.length; i++) {
+                showJumbos(data[i]);
+            }
+        }
+    });
+
+    $.ajax({
+        url: "/all/cocktails",
+        method: "GET",
+        success: function (data) {
+            for (var i = 0; i < data.length; i++) {
+                showCocktails(data[i]);
+            }
+        }
+    });
 });
 

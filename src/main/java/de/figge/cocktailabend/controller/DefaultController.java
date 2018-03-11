@@ -19,6 +19,23 @@ public class DefaultController {
     @Autowired
     private SimpMessagingTemplate template;
 
+    @GetMapping("/isReady")
+    public String user() {
+        return "/isReady";
+    }
+
+    //ab hier nützlich
+
+    @GetMapping("/admin")
+    public String admin() {
+        return "/admin";
+    }
+
+    @GetMapping("/cocktails")
+    public String cocktails() {
+        return "/cocktails";
+    }
+
     @GetMapping("/")
     public String home1() {
         return "/home";
@@ -27,21 +44,6 @@ public class DefaultController {
     @GetMapping("/home")
     public String home() {
         return "/home";
-    }
-
-    @GetMapping("/admin")
-    public String admin() {
-        return "/admin";
-    }
-
-    @GetMapping("/user")
-    public String user() {
-        return "/user";
-    }
-
-    @GetMapping("/cocktails")
-    public String cocktails() {
-        return "/cocktails";
     }
 
     @GetMapping("/login")
@@ -76,7 +78,23 @@ public class DefaultController {
         return ResponseEntity.ok(cocktails);
     }
 
-    @RequestMapping(value = "/ready/{number}/{jumbo}",
+    @RequestMapping(value = "/all/jumbo",
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> getFirstJumbos() {
+        List<Cocktail> cocktails = cocktailRepository.findFirst5ByJumboOrderByDateAsc(true);
+        return ResponseEntity.ok(cocktails);
+    }
+
+    @RequestMapping(value = "/all/cocktail",
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> getFirstCocktails() {
+        List<Cocktail> cocktails = cocktailRepository.findFirst10ByJumboOrderByDateAsc(false);
+        return ResponseEntity.ok(cocktails);
+    }
+
+    @RequestMapping(value = "/ready/{jumbo}/{number}",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> isReady(@PathVariable int number, @PathVariable boolean jumbo) {

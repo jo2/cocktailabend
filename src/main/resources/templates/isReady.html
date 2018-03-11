@@ -1,0 +1,58 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Cocktail fertig?</title>
+    <div th:replace="fragments/header :: header-css"/>
+</head>
+<body>
+
+<div th:replace="fragments/header :: header"/>
+
+<div class="container">
+
+    <div class="starter-template">
+        <div id="ready-form">
+            <form class="form-horizontal">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" for="kind">Art</label>
+                    <div class="col-sm-10">
+                        <select id="kind" class="form-control">
+                            <option value="true">Jumbo</option>
+                            <option value="false">Cocktail</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" for="number">Nummer</label>
+                    <div class="col-sm-10">
+                        <input type="number" class="form-control" id="number" placeholder="Nummer"/>
+                    </div>
+                </div>
+                <div class="figge-row">
+                    <div class="col-sm-offset-2">
+                        <a id="send" class="btn btn-success">Anfragen</a>
+                        <a th:href="@{/home}" class="btn btn-default">Abbrechen</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div id="ready">
+            Der Cocktail <span id="cocktail-ready"></span> ist fertig. Du kannst ihn Dir an der Theke abholen.
+        </div>
+        <div id="waiting">
+            Der Cocktail <span id="cocktail-waiting"></span> ist noch nicht fertig.
+        </div>
+        <div class="figge-row" id="button">
+            <div class="col-sm-offset-2">
+                <a th:href="@{/isReady}" class="btn btn-default">Zurück</a>
+            </div>
+        </div>
+    </div>
+
+</div>
+<!-- /.container -->
+<div th:replace="fragments/footer :: footer"/>
+<script src="../../js/isReady.js"></script>
+
+</body>
+</html>
