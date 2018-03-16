@@ -68,7 +68,8 @@ public class DefaultController {
     }
 
     @RequestMapping(value = "/authenticate",
-            method = RequestMethod.GET)
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> isAuthenticated() {
         return ResponseEntity.ok(true);
     }
