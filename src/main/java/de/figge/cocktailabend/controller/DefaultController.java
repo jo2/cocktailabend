@@ -1,6 +1,7 @@
 package de.figge.cocktailabend.controller;
 
 import de.figge.cocktailabend.entities.Cocktail;
+import de.figge.cocktailabend.entities.Statistic;
 import de.figge.cocktailabend.repositories.CocktailRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -9,6 +10,8 @@ import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 
 @Controller
@@ -20,15 +23,23 @@ public class DefaultController {
     private SimpMessagingTemplate template;
 
     @GetMapping("/isReady")
-    public String user() {
+    public String isReady() {
         return "/isReady";
     }
 
-    //ab hier nützlich
+    @GetMapping("/statistics")
+    public String statistics() {
+        return "/statistics";
+    }
 
     @GetMapping("/admin")
     public String admin() {
         return "/admin";
+    }
+
+    @GetMapping("/console")
+    public String console() {
+        return "/console";
     }
 
     @GetMapping("/cocktails")
@@ -56,6 +67,12 @@ public class DefaultController {
         return "/error/403";
     }
 
+    @RequestMapping(value = "/authenticate",
+            method = RequestMethod.GET)
+    public ResponseEntity<?> isAuthenticated() {
+        return ResponseEntity.ok(true);
+    }
+
     @RequestMapping(value = "/admin/create",
             method = RequestMethod.PUT,
             produces = MediaType.APPLICATION_JSON_VALUE,
@@ -70,6 +87,12 @@ public class DefaultController {
         return ResponseEntity.ok(cocktail);
     }
 
+    @RequestMapping(value = "/admin/clear",
+            method = RequestMethod.DELETE)
+    public void clear() {
+        cocktailRepository.deleteAll();
+    }
+
     @RequestMapping(value = "/all",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
@@ -78,7 +101,40 @@ public class DefaultController {
         return ResponseEntity.ok(cocktails);
     }
 
-    @RequestMapping(value = "/all/jumbo",
+    @RequestMapping(value = "/statistics/data",
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> getStatistics() {
+        List<Statistic> statistics = new LinkedList<Statistic>();
+        long startTime = cocktailRepository.getMinDate().getTime();
+        startTime = startTime - (startTime % (5 * 60 * 1000));
+        long endTime = cocktailRepository.getMaxDate().getTime();
+        endTime = endTime - (endTime % (5 * 60 * 1000));
+
+        for (long time = startTime; time <= endTime; time = time + (5 * 60 * 1000)) {
+            int jumboCount = 0;
+            int cocktailCount = 0;
+
+            for (Cocktail cocktail : cocktailRepository.findAllByDateBetween(new Date(time), new Date(time + (5 * 60 * 1000) - 1))) {
+                if (cocktail.isJumbo()) {
+                    jumboCount++;
+                } else {
+                    cocktailCount++;
+                }
+            }
+            statistics.add(new Statistic(new Date(time), jumboCount, cocktailCount));
+        }
+        return ResponseEntity.ok(statistics);
+    }
+
+    @RequestMapping(value = "/all/{jumbo}",
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> getAll(@PathVariable boolean jumbo) {
+        return ResponseEntity.ok(cocktailRepository.findAllByJumboOrderByNumber(jumbo));
+    }
+
+    @RequestMapping(value = "/first/jumbo",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> getFirstJumbos() {
@@ -86,7 +142,7 @@ public class DefaultController {
         return ResponseEntity.ok(cocktails);
     }
 
-    @RequestMapping(value = "/all/cocktail",
+    @RequestMapping(value = "/first/cocktail",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> getFirstCocktails() {

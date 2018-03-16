@@ -54,7 +54,7 @@ $(function () {
     connect();
 
     $.ajax({
-        url: "/all/jumbo",
+        url: "/first/jumbo",
         method: "GET",
         success: function (data) {
             for (var i = 0; i < data.length; i++) {
@@ -64,7 +64,7 @@ $(function () {
     });
 
     $.ajax({
-        url: "/all/cocktails",
+        url: "/first/cocktails",
         method: "GET",
         success: function (data) {
             for (var i = 0; i < data.length; i++) {
