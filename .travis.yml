@@ -6,6 +6,8 @@ jdk: oraclejdk8
 services:
   - docker
 
-before_install:
-  - mvn package docker:build
-  - docker images
+install:
+  - sudo mvn package docker:build
+  - sudo docker images
+  - sudo docker run -p 8080:8080 --name cocktailabend -d cocktailabend
+  - sudo docker ps
