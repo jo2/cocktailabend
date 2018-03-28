@@ -1,5 +1,3 @@
-require: sudo
-
 language: java
 jdk: oraclejdk8
 
@@ -7,7 +5,7 @@ services:
   - docker
 
 install:
-  - sudo mvn package docker:build
-  - sudo docker images
-  - sudo docker run -p 8080:8080 --name cocktailabend -d cocktailabend
-  - sudo docker ps
+  - mvn package docker:build
+  - docker images
+  - docker run -p 8080:8080 --name cocktailabend -d cocktailabend
+  - docker ps
