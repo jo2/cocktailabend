@@ -5,7 +5,5 @@ services:
   - docker
 
 before_install:
-  - docker build -t jo2/cocktailabend .
-  - docker run -d -p 127.0.0.1:80:4567 jo2/cocktailabend /bin/sh -c "cd /root/jo2; bundle exec foreman start;"
-  - docker ps -a
-  - docker run jo2/cocktailabend /bin/sh -c "cd /root/jo2; bundle exec rake test"
+  - docker build -t cocktailabend
+  - docker images
