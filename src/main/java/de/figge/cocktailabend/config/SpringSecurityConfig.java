@@ -20,7 +20,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private AccessDeniedHandler accessDeniedHandler;
-    //TODO create file config.properties with properties admin.usernam and admin.password and fill it with the credentials
+    //TODO create file config.properties with properties admin.usernam, admin.password and ldap.url and fill it with the credentials
     @Value("${admin.dn}")
     private String adminDn;
     @Value("${admin.password}")
