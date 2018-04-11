@@ -8,4 +8,7 @@ install:
   - mvn package docker:build -DskipTests=true
   - docker images
   - docker run -p 8080:8080 --name cocktailabend -d cocktailabend
+  - docker login -u johannes.teklote@fh-dortmund.de -p 1bSWfkcWx7OX1LhPuscq
+  - docker tag cocktailabend notmyfaultsir/cocktailabend
+  - docker push notmyfaultsir/cocktailabend
   - docker ps
