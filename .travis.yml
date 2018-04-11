@@ -1,0 +1,11 @@
+language: java
+jdk: oraclejdk8
+
+services:
+  - docker
+
+install:
+  - mvn package docker:build -DskipTests=true
+  - docker images
+  - docker run -p 8080:8080 --name cocktailabend -d cocktailabend
+  - docker ps
