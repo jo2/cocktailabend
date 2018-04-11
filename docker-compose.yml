@@ -1,0 +1,13 @@
+version: '2'
+services:
+  cocktailabend:
+    build:
+      - "./src/main/docker"
+    ports:
+      - "8080:8080"
+  nginx:
+    build: ./nginx
+    links:
+      - cocktailabend:cocktailabend
+    ports:
+      - "80:80"
