@@ -79,11 +79,18 @@ public class DefaultController {
             produces = MediaType.APPLICATION_JSON_VALUE,
             consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> create(@RequestBody Cocktail cocktail) {
-        cocktail = cocktailRepository.save(cocktail);
-        if (cocktail.isJumbo()) {
-            template.convertAndSend("/topic/jumbos", cocktail);
+        if (cocktailRepository.findByNumberAndJumbo(cocktail.getNumber(), cocktail.isJumbo()) == null) {
+            cocktail.incCalled();
+            cocktail = cocktailRepository.save(cocktail);
+            if (cocktail.isJumbo()) {
+                template.convertAndSend("/topic/jumbos", cocktail);
+            } else {
+                template.convertAndSend("/topic/cocktails", cocktail);
+            }
         } else {
-            template.convertAndSend("/topic/cocktails", cocktail);
+            cocktail = cocktailRepository.findByNumberAndJumbo(cocktail.getNumber(), cocktail.isJumbo());
+            cocktail.incCalled();
+            cocktail = cocktailRepository.save(cocktail);
         }
         return ResponseEntity.ok(cocktail);
     }
@@ -126,6 +133,13 @@ public class DefaultController {
             statistics.add(new Statistic(new Date(time), jumboCount, cocktailCount));
         }
         return ResponseEntity.ok(statistics);
+    }
+
+    @RequestMapping(value = "/statistics/mostCalled",
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> getMostCalled() {
+        return ResponseEntity.ok(cocktailRepository.findAFirst10ByOrOrderByCalled());
     }
 
     @RequestMapping(value = "/all/{jumbo}",

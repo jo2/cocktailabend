@@ -24,6 +24,9 @@ public class Cocktail {
     @JsonFormat(pattern = "dd.MM.yyyy HH:mm:ss")
     private Date date = new Date();
 
+    @Column(name = "called")
+    private int called;
+
     public Cocktail(){
 
     }
@@ -71,5 +74,17 @@ public class Cocktail {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    public int getCalled() {
+        return called;
+    }
+
+    public void setCalled(int called) {
+        this.called = called;
+    }
+
+    public void incCalled() {
+        this.called++;
     }
 }
