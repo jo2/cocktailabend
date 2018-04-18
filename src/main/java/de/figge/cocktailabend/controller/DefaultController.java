@@ -113,6 +113,9 @@ public class DefaultController {
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> getStatistics() {
+        if (cocktailRepository.count() == 0) {
+            return ResponseEntity.ok(-1);
+        }
         List<Statistic> statistics = new LinkedList<Statistic>();
         long startTime = cocktailRepository.getMinDate().getTime();
         startTime = startTime - (startTime % (5 * 60 * 1000));
@@ -139,7 +142,12 @@ public class DefaultController {
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> getMostCalled() {
-        return ResponseEntity.ok(cocktailRepository.findAFirst10ByOrOrderByCalled());
+        List<Cocktail> mostCalled = cocktailRepository.findTop10ByOrderByCalledDesc();
+        if (mostCalled == null || mostCalled.isEmpty()) {
+            return ResponseEntity.ok(-1);
+        } else {
+            return ResponseEntity.ok(mostCalled);
+        }
     }
 
     @RequestMapping(value = "/all/{jumbo}",

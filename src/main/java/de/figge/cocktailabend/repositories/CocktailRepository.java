@@ -18,5 +18,5 @@ public interface CocktailRepository extends JpaRepository<Cocktail, Long> {
     @Query("SELECT min(cocktail.date) FROM Cocktail cocktail")
     public Date getMinDate();
     public List<Cocktail> findAllByDateBetween(Date start, Date end);
-    public List<Cocktail> findAFirst10ByOrOrderByCalled();
+    public List<Cocktail> findTop10ByOrderByCalledDesc();
 }
