@@ -82,23 +82,24 @@ public class DefaultController {
         if (cocktailRepository.findByNumberAndJumbo(cocktail.getNumber(), cocktail.isJumbo()) == null) {
             cocktail.incCalled();
             cocktail = cocktailRepository.save(cocktail);
-            if (cocktail.isJumbo()) {
-                template.convertAndSend("/topic/jumbos", cocktail);
-            } else {
-                template.convertAndSend("/topic/cocktails", cocktail);
-            }
         } else {
             cocktail = cocktailRepository.findByNumberAndJumbo(cocktail.getNumber(), cocktail.isJumbo());
             cocktail.incCalled();
             cocktail = cocktailRepository.save(cocktail);
+        }
+        if (cocktail.isJumbo()) {
+            template.convertAndSend("/topic/jumbos", cocktail);
+        } else {
+            template.convertAndSend("/topic/cocktails", cocktail);
         }
         return ResponseEntity.ok(cocktail);
     }
 
     @RequestMapping(value = "/admin/clear",
             method = RequestMethod.DELETE)
-    public void clear() {
+    public ResponseEntity<?> clear() {
         cocktailRepository.deleteAll();
+        return ResponseEntity.ok("database cleared");
     }
 
     @RequestMapping(value = "/all",
