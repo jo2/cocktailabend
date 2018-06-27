@@ -21,7 +21,7 @@ public class Cocktail {
     @Column(name = "jumbo")
     private boolean jumbo;
 
-    @JsonFormat(pattern = "dd.MM.yyyy HH:mm:ss")
+    @JsonFormat(pattern = "dd.MM.yyyy HH:mm:ss", timezone = "CEST+01:00")
     private Date date = new Date();
 
     @Column(name = "called")

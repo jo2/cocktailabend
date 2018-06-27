@@ -64,12 +64,15 @@ $(function () {
     });
 
     $.ajax({
-        url: "/first/cocktails",
+        url: "/first/cocktail",
         method: "GET",
         success: function (data) {
             for (var i = 0; i < data.length; i++) {
                 showCocktails(data[i]);
             }
+        },
+        error: function (data) {
+            console.log('error');
         }
     });
 });

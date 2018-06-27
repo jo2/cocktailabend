@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Statistiken</title>
-    <div th:replace="fragments/header :: header-css"/>
+    <div th:replace="fragments/head :: head"/>
 </head>
 <body>
 
@@ -21,10 +21,10 @@
     </div>
 
 </div>
-<!-- /.container -->
+
 <div th:replace="fragments/footer :: footer"/>
-<script src="../../js/chart.min.js"></script>
-<script src="../../js/statistics.js"></script>
+<script th:src="@{/js/chart.min.js}"></script>
+<script th:src="@{/js/statistics.js}"></script>
 
 </body>
 </html>

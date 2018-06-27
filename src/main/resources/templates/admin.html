@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Admin-Bereich</title>
-    <div th:replace="fragments/header :: header-css"/>
+    <div th:replace="fragments/head :: head"/>
 </head>
 <body>
 
@@ -22,6 +22,7 @@
 <!-- /.container -->
 
 <div th:replace="fragments/footer :: footer"/>
+<script th:src="@{/js/admin.js}"></script>
 
 </body>
 </html>
