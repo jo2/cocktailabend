@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -73,6 +74,7 @@ public class DefaultController {
         return "/error/403";
     }
 
+    @PreAuthorize("#oauth2.hasScope('CREATE_COCKTAIL')")
     @RequestMapping(value = "/authenticate",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
@@ -80,6 +82,7 @@ public class DefaultController {
         return ResponseEntity.ok(true);
     }
 
+    @PreAuthorize("#oauth2.hasScope('CREATE_COCKTAIL')")
     @RequestMapping(value = "/admin/create",
             method = RequestMethod.PUT,
             produces = MediaType.APPLICATION_JSON_VALUE,
