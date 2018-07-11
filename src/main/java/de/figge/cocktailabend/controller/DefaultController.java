@@ -8,6 +8,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
@@ -60,6 +61,11 @@ public class DefaultController {
     @GetMapping("/login")
     public String login() {
         return "/login";
+    }
+
+    @GetMapping(value = "/logout-success")
+    public String getLogoutPage(Model model) {
+        return "logout";
     }
 
     @GetMapping("/403")
@@ -162,7 +168,7 @@ public class DefaultController {
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> getFirstJumbos() {
-        List<Cocktail> cocktails = cocktailRepository.findFirst5ByJumboOrderByDateAsc(true);
+        List<Cocktail> cocktails = cocktailRepository.findAllByJumboOrderByDateAsc(true);
         return ResponseEntity.ok(cocktails);
     }
 
@@ -170,7 +176,7 @@ public class DefaultController {
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> getFirstCocktails() {
-        List<Cocktail> cocktails = cocktailRepository.findFirst10ByJumboOrderByDateAsc(false);
+        List<Cocktail> cocktails = cocktailRepository.findAllByJumboOrderByDateAsc(false);
         return ResponseEntity.ok(cocktails);
     }
 

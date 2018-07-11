@@ -94,6 +94,12 @@
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
             <version>1.5.3.RELEASE</version>
         </dependency>
+
+        <!--DevTools-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+        </dependency>
     </dependencies>
     <build>
         <plugins>

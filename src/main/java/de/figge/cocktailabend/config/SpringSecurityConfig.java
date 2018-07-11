@@ -12,6 +12,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.access.AccessDeniedHandler;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @PropertySource("classpath:config.properties")
@@ -32,13 +33,15 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/admin/**", "/console/**", "/statistics/**", "/authenticate").authenticated()
+                .antMatchers("/admin/**", "/statistics/**", "/authenticate").authenticated()
                 .antMatchers("/", "/home", "/about", "/all/**", "/first/**", "/ready/**", "/count", "/cocktails", "/gs-guide-websocket/**", "/**").permitAll()
                 .anyRequest().authenticated()
-                .and().httpBasic()
-                .and().headers().frameOptions().disable()
-                .and().formLogin().loginPage("/login").permitAll()
-                .and().logout().permitAll()
+                .and()
+                .formLogin().loginPage("/login").permitAll()
+                .and()
+                .logout().invalidateHttpSession(true).clearAuthentication(true)
+                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                .logoutSuccessUrl("/logout-success").permitAll()
                 .and().exceptionHandling().accessDeniedHandler(accessDeniedHandler);
     }
 

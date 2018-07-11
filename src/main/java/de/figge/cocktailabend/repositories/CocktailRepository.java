@@ -11,8 +11,11 @@ public interface CocktailRepository extends JpaRepository<Cocktail, Long> {
     public Cocktail findByNumberAndJumbo(int number, boolean jumbo);
     public List<Cocktail> findAllByOrderByNumberAscJumboAsc();
     public List<Cocktail> findAllByJumboOrderByNumber(boolean jumbo);
-    public List<Cocktail> findFirst10ByJumboOrderByDateAsc(boolean jumbo);
-    public List<Cocktail> findFirst5ByJumboOrderByDateAsc(boolean jumbo);
+    public List<Cocktail> findFirst10ByJumboOrderByDateDesc(boolean jumbo);
+    public List<Cocktail> findFirst5ByJumboOrderByDateDesc(boolean jumbo);
+
+    public List<Cocktail> findAllByJumboOrderByDateAsc(boolean jumbo);
+
     @Query("SELECT max(cocktail.date) FROM Cocktail cocktail")
     public Date getMaxDate();
     @Query("SELECT min(cocktail.date) FROM Cocktail cocktail")

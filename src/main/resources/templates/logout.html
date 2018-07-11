@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>Logout</title>
+    <div th:replace="fragments/head :: head"/>
+</head>
+<body>
+
+<div th:replace="fragments/header :: header"/>
+
+<div>
+    <div class="container main-content">
+        <ul class="list-group">
+            <li class="list-group-item list-group-item-info"><h3>You have been successfully logged out.</h3></li>
+        </ul>
+        <a th:href="@{/}">Return home</a>
+    </div>
+</div>
+
+</body>
+</html>
