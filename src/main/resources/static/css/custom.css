@@ -3,13 +3,13 @@ html, body, .container {
 }
 
 body {
-    background-color: #333333;
+    background-color: #333;
     text-align: center;
 }
 
 h1 {
     margin: 0;
-    color: #000;
+    color: #333;
 }
 
 .container {
@@ -27,7 +27,7 @@ h1 {
 
 @media (min-width: 992px) {
     h1 {
-        font-size: 10em;
+        font-size: 4em;
     }
 
     .row .no-float {
@@ -39,21 +39,30 @@ h1 {
 #cocktailList, #jumboList {
     list-style-type: none;
     padding-left: 0;
-    font-size: 600%;
+    font-size: 3.8em;
 }
 
-#cocktailList {
-    columns: 2;
-    -webkit-columns: 2;
-    -moz-columns: 2;
+ul {
+    display: inline-flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+
+li {
+    width: 150px;
+}
+
+body {
+    overflow: hidden;
+}
+
+#cocktailList, #jumboList {
+    overflow-y: auto;
 }
 
 .cocktailContainer {
     background-color: white;
-}
-
-#jumboList {
-
 }
 
 .jumboContainer {

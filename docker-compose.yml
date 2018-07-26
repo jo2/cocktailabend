@@ -1,13 +1,26 @@
-version: '2'
+version: '3.3'
+
 services:
   cocktailabend:
-    build:
-      - "./src/main/docker"
-    ports:
-      - "8080:8080"
-  nginx:
-    build: ./nginx
-    links:
-      - cocktailabend:cocktailabend
-    ports:
-      - "80:80"
+      image: cocktailabend
+      build:
+        context: ./
+      ports: ['8080:8080']
+      networks:
+        - webnet
+      links:
+        - "mysql"
+  mysql:
+      image: mysql/mysql-server:5.7
+      environment:
+        MYSQL_ROOT_PASSWORD: root
+        MYSQL_DATABASE: cocktails
+        MYSQL_USER: user
+        MYSQL_PASSWORD: pass
+      ports: ['42333:3306']
+      networks:
+        - webnet
+
+networks:
+  webnet:
+    driver: bridge

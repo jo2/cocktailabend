@@ -19,7 +19,6 @@
                     <li><a th:href="@{/cocktails}">Cocktails</a></li>
                     <li><a th:href="@{/isReady}">Fertig?</a></li>
                     <li><a th:href="@{/statistics}" sec:authorize="isAuthenticated()">Statistiken</a></li>
-                    <li><a th:href="@{/console}" sec:authorize="isAuthenticated()">Konsole</a></li>
                     <li><a th:href="@{/admin}" sec:authorize="isAuthenticated()">Admin</a></li>
                     <li><a th:href="@{/login}" sec:authorize="isAnonymous()">Login</a></li>
                     <li><a th:href="@{/logout}" sec:authorize="isAuthenticated()">Logout</a></li>
