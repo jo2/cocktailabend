@@ -5,11 +5,9 @@ services:
       image: cocktailabend
       build:
         context: ./
-      ports: ['8080:8080']
-      networks:
-        - webnet
-      links:
-        - "mysql"
+      ports:
+        - 8080:8080
+      restart: on-failure
   mysql:
       image: mysql/mysql-server:5.7
       environment:
@@ -17,10 +15,6 @@ services:
         MYSQL_DATABASE: cocktails
         MYSQL_USER: user
         MYSQL_PASSWORD: pass
-      ports: ['42333:3306']
-      networks:
-        - webnet
-
-networks:
-  webnet:
-    driver: bridge
+      ports:
+        - 3306:3306
+      restart: on-failure

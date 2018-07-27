@@ -26,27 +26,27 @@ public class DefaultController {
 
     @GetMapping("/isReady")
     public String isReady() {
-        return "/isReady";
+        return "isReady";
     }
 
     @GetMapping("/statistics")
     public String statistics() {
-        return "/statistics";
+        return "statistics";
     }
 
     @GetMapping("/admin")
     public String admin() {
-        return "/admin";
+        return "admin";
     }
 
     @GetMapping("/console")
     public String console() {
-        return "/console";
+        return "console";
     }
 
     @GetMapping("/cocktails")
     public String cocktails() {
-        return "/cocktails";
+        return "cocktails";
     }
 
     @GetMapping("/")
@@ -61,7 +61,7 @@ public class DefaultController {
 
     @GetMapping("/login")
     public String login() {
-        return "/login";
+        return "login";
     }
 
     @GetMapping(value = "/logout-success")
@@ -71,7 +71,7 @@ public class DefaultController {
 
     @GetMapping("/403")
     public String error403() {
-        return "/error/403";
+        return "error/403";
     }
 
     @PreAuthorize("#oauth2.hasScope('CREATE_COCKTAIL')")
