@@ -16,5 +16,5 @@ services:
         MYSQL_USER: user
         MYSQL_PASSWORD: pass
       ports:
-        - 3306:3306
+        - 3300:3306
       restart: on-failure
