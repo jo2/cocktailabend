@@ -23,3 +23,19 @@ input[type=number] {
 .figge-col {
     padding-left: 0;
 }
+
+.cocktail-navbar {
+	border-radius: 0;
+}
+
+h4 {
+	font-size: 220%;
+	font-weight: bold;
+	text-decoration: underline;
+	font-family: 'cocktail-font';
+}
+
+@font-face {
+	font-family: "cocktail-font";
+	src: url(/fonts/cocktailabend-font.ttf) format("truetype");
+}
