@@ -2,7 +2,8 @@ version: '3.3'
 
 services:
   cocktailabend:
-      image: cocktailabend
+      image: notmyfaultsir/cocktailabend:1.1
+#      image: cocktailabend
       build:
         context: ./
       ports:
@@ -15,6 +16,6 @@ services:
         MYSQL_DATABASE: cocktails
         MYSQL_USER: user
         MYSQL_PASSWORD: pass
-      ports:
-        - 3300:3306
+      expose:
+        - 3306
       restart: on-failure
