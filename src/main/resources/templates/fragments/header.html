@@ -16,7 +16,7 @@
 
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li><a th:href="@{/cocktails}">Cocktails</a></li>
+                    <li><a th:href="@{/cocktails}" sec:authorize="isAuthenticated()">Cocktails</a></li>
                     <li><a th:href="@{/isReady}">Fertig?</a></li>
                     <li><a th:href="@{/statistics}" sec:authorize="isAuthenticated()">Statistiken</a></li>
                     <li><a th:href="@{/admin}" sec:authorize="isAuthenticated()">Admin</a></li>
