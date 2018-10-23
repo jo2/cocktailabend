@@ -2,6 +2,7 @@ var stompClient = null;
 var list = null;
 
 var h1Height;
+var chHeight;
 
 (function($) {
     $.fn.hasScrollBar = function() {
@@ -59,8 +60,11 @@ function showJumbos(message) {
 
 $(function () {
     h1Height = $('h1').height();
-    $('#jumboList').height(document.body.clientHeight - h1Height);
-    $('#cocktailList').height(document.body.clientHeight - h1Height);
+    chHeight = $('.cocktail-header').height();
+
+    $('#cocktailRow').height($('#cocktailRow').height() - chHeight);
+    $('#jumboList').height($('#jumboList').height() - h1Height - chHeight);
+    $('#cocktailList').height($('#cocktailList').height() - h1Height - chHeight);
 
     $("form").on('submit', function (e) {
         e.preventDefault();

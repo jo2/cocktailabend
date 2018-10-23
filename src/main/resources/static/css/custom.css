@@ -5,6 +5,7 @@ html, body, .container {
 body {
     background-color: #333;
     text-align: center;
+    overflow: hidden;
 }
 
 h1 {
@@ -12,73 +13,6 @@ h1 {
     color: #333;
 }
 
-.container {
-    display: table;
-    width: 100%;
-    padding: 0;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-}
-
-.row::before {
-    content: none;
-}
-
-.cocktail-header {
-    font-size: 4em;
-    color: white;
-    margin: auto;
-}
-
 .row {
     display: flex;
-}
-
-@media (min-width: 992px) {
-    h1 {
-        font-size: 4em;
-    }
-
-    .cocktailContainer {
-        flex-grow: 2;
-    }
-
-    .jumboContainer {
-        flex-grow: 1;
-    }
-}
-
-#cocktailList, #jumboList {
-    list-style-type: none;
-    padding-left: 0;
-    font-size: 3.8em;
-}
-
-ul {
-    display: inline-flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
-}
-
-li {
-    width: 150px;
-}
-
-body {
-    overflow: hidden;
-}
-
-#cocktailList, #jumboList {
-    overflow-y: auto;
-}
-
-.cocktailContainer {
-    background-color: white;
-    height: 100%;
-}
-
-.jumboContainer {
-    background-color: lightgreen;
-    height: 100%;
 }
