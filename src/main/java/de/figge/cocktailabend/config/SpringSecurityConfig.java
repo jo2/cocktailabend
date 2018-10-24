@@ -27,6 +27,8 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     private String adminPassword;
     @Value("${ldap.url}")
     private String ldapUrl;
+    @Value("${MEMBER}")
+    private String member;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -45,7 +47,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.ldapAuthentication()
-                .userDnPatterns("cn={0},ou=people").groupSearchBase("ou=groups").groupRoleAttribute("member").contextSource()
+                .userDnPatterns("cn={0},ou=people").groupSearchBase("ou=groups").userSearchFilter("memberOf=" + member).groupRoleAttribute("member").contextSource()
                 .managerDn(adminDn).managerPassword(adminPassword)
                 .url(ldapUrl)
                 .and().passwordCompare().passwordAttribute("userPassword")
